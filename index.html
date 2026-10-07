@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a2a1f">
+  <title>扫雷 · Minesweeper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- 顶部标题 -->
+    <header class="titlebar">
+      <h1>💣 扫雷</h1>
+      <p class="subtitle">第一下绝不踩雷 · 长按插旗 🚩</p>
+    </header>
+
+    <!-- 难度选择 -->
+    <div class="difficulty" id="difficulty">
+      <button class="diff-btn active" data-level="easy">初级 9×9</button>
+      <button class="diff-btn" data-level="normal">中级 16×16</button>
+      <button class="diff-btn" data-level="hard">高级 16×30</button>
+    </div>
+
+    <!-- 游戏面板 -->
+    <section class="panel">
+      <div class="statusbar">
+        <div class="counter" id="mineCounter">010</div>
+        <button class="face" id="face" aria-label="重新开始">🙂</button>
+        <div class="counter" id="timer">000</div>
+      </div>
+
+      <div class="board-wrap">
+        <div class="board" id="board"></div>
+      </div>
+    </section>
+
+    <!-- 提示条 -->
+    <footer class="hint">
+      <span>👆 点击翻开</span>
+      <span>✋ 长按 / 右键插旗</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

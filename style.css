@@ -1,0 +1,206 @@
+/* ===== 扫雷 · 手机端界面样式 ===== */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --bg-top: #16222e;
+  --bg-bottom: #0e141b;
+  --panel: #2b3946;
+  --cell-cover: #4a5d6e;
+  --cell-cover2: #3f5060;
+  --cell-open: #22303c;
+  --text: #e8eef3;
+  --muted: #9fb0c0;
+  --accent: #f2c94c;
+  --flag: #ff6b6b;
+  --n1: #4aa3ff;
+  --n2: #4ade80;
+  --n3: #ff7b54;
+  --n4: #b48cff;
+  --n5: #ff9ff3;
+  --n6: #54d9d9;
+  --n7: #ffd54a;
+  --n8: #ff8fb0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  background: radial-gradient(120% 120% at 50% 0%, var(--bg-top) 0%, var(--bg-bottom) 70%);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.app {
+  width: 100%;
+  max-width: 560px;
+  padding: 16px 12px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* 标题 */
+.titlebar { text-align: center; }
+.titlebar h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+.titlebar .subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 难度按钮 */
+.difficulty {
+  display: flex;
+  gap: 8px;
+  background: rgba(0,0,0,.25);
+  padding: 6px;
+  border-radius: 12px;
+}
+.diff-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.diff-btn.active {
+  background: var(--accent);
+  color: #1a1a1a;
+  box-shadow: 0 2px 10px rgba(242,201,76,.35);
+}
+
+/* 面板 */
+.panel {
+  width: 100%;
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* 状态栏：雷数 / 笑脸 / 计时 */
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.counter {
+  font-family: "Courier New", monospace;
+  font-size: 22px;
+  font-weight: 700;
+  background: #0d141b;
+  color: #ff4d4d;
+  padding: 6px 10px;
+  border-radius: 8px;
+  letter-spacing: 2px;
+  min-width: 58px;
+  text-align: center;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.6);
+}
+.face {
+  width: 52px;
+  height: 52px;
+  font-size: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cell-cover);
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0,0,0,.3), 0 6px 14px rgba(0,0,0,.3);
+  transition: transform .1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.face:active { transform: translateY(2px); }
+
+/* 棋盘 */
+.board-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.board {
+  display: grid;
+  gap: 2px;
+  margin: 0 auto;
+  width: max-content;
+}
+
+/* 格子 */
+.cell {
+  width: var(--cell-size, 30px);
+  height: var(--cell-size, 30px);
+  border: 0;
+  border-radius: 5px;
+  font-size: calc(var(--cell-size, 30px) * .62);
+  font-weight: 800;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background .1s ease, transform .06s ease;
+  background: linear-gradient(145deg, var(--cell-cover), var(--cell-cover2));
+  box-shadow: 0 2px 0 rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18);
+  color: transparent;
+}
+.cell:active { transform: scale(.9); }
+
+/* 翻开的格子 */
+.cell.open {
+  background: var(--cell-open);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,.5);
+  cursor: default;
+  color: var(--text);
+}
+.cell.open:active { transform: none; }
+
+/* 数字颜色 */
+.cell.open.n1 { color: var(--n1); }
+.cell.open.n2 { color: var(--n2); }
+.cell.open.n3 { color: var(--n3); }
+.cell.open.n4 { color: var(--n4); }
+.cell.open.n5 { color: var(--n5); }
+.cell.open.n6 { color: var(--n6); }
+.cell.open.n7 { color: var(--n7); }
+.cell.open.n8 { color: var(--n8); }
+
+/* 旗子 */
+.cell.flag { color: var(--flag); font-size: calc(var(--cell-size, 30px) * .6); }
+
+/* 地雷（失败时显示） */
+.cell.mine { background: #a33; color: #fff; }
+.cell.mine.boom { background: #e74c3c; }
+
+/* 底部提示 */
+.hint {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 横屏大棋盘时字号微调 */
+@media (max-width: 400px) {
+  .diff-btn { padding: 8px 10px; font-size: 13px; }
+}
